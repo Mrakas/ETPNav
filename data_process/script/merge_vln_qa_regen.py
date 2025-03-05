@@ -61,7 +61,7 @@ answer in format :"merged data"
 
 step = 0
 
-split = 'val_seen'
+split = 'train'
 
 
 qa_file = f'/mnt/data5/ghx/ETPworkplace/ETPNav/data_process/struct_from_gpt/output_step1_{split}.json'

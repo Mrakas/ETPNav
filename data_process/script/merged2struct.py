@@ -1,26 +1,50 @@
 import json
 import os
 import time
-import openai
 from openai import OpenAI
 import unicodedata
 from tqdm import tqdm
+import re
 """
 merge vln and qa json files with gpt, save in vln file. 
+
+用于正则化提取
+先提取 "xxx"
+然后提取 ---xxx---
+删除文本中的 \n 
 """
 
-def clean_instruction(instruction):
-    pass
-    instruction = instruction.replace('\n', ' ')
-    instruction = instruction.replace('  ', ' ')
-    instruction = instruction.strip()
-    return instruction
+def clean_instruction(text):
+    if '"' in text:
+        result = re.search(r'\"(.*?)\"', text, re.DOTALL)
+        print(result)
+        if result:
+            return result.group(1)
+        else:
+            print("error")
+            import ipdb; ipdb.set_trace()
+
+    elif '---' in text:
+        result = re.search(r'---(.*?)---', text, re.DOTALL)
+        if result:
+            return result.group(1)
+        else:
+            result = re.search(r'---(.*?)', text, re.DOTALL)
+            if result:
+                return result.group(1)
+            else:
+                print("error")
+                import ipdb; ipdb.set_trace()
+
+    else:
+        return text
+    
 
 step = 0
 
-split = 'val_seen'
-vln_file =    f'/mnt/data5/ghx/ETPworkplace/ETPNav/data_process/step2_gpt_merged/{split}_merged_fix20.json'
-output_file = f'/mnt/data5/ghx/ETPworkplace/ETPNav/data_process/step2_gpt_merged/{split}_merged_clean.json'
+split = 'train'
+vln_file =    f'/mnt/data5/ghx/ETPworkplace/ETPNav/data_process/step2_gpt_merged/{split}_merged_fix20_regen.json'
+output_file = f'/mnt/data5/ghx/ETPworkplace/ETPNav/data_process/step2_gpt_merged/{split}_merged_fullyclean.json'
 
 
 
@@ -32,13 +56,10 @@ for cur in tqdm(vln_data['episodes'][:]):
     ori_instruction_text = cur['instruction']['instruction_text']
 
     # save in vln_data
-    #cur['instruction']['instruction_text'] = clean_instruction(ori_instruction_text)
-    print("=====================")
-    print(cur['instruction']['instruction_text'])
-    #import ipdb; ipdb.set_trace()
+    cur['instruction']['instruction_text'] = clean_instruction(ori_instruction_text)
     
-    # with open(output_file, 'w', encoding='utf-8') as f:
-    #     json.dump(vln_data, f, ensure_ascii=False, indent=4)
+with open(output_file, 'w', encoding='utf-8') as f:
+    json.dump(vln_data, f, ensure_ascii=False, indent=4)
 
 
 print("finished, saved to", output_file)

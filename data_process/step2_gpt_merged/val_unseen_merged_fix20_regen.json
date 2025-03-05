@@ -17148,7 +17148,7 @@
                 }
             ],
             "instruction": {
-                "instruction_text": "Here’s a more natural combination of your navigation instructions and the question:\n\n---\n\nTo reach the upper floor, start by turning around and walking past the hieroglyphics picture. Follow the path up the steps, and when you reach the landing, turn to your right and continue up three more steps. Once you reach the top, just wait there.",
+                "instruction_text": "Here’s a more natural combination of your navigation instructions and the question:\n\n---\n\nTo reach the upper floor, start by turning around and walking past the hieroglyphics picture. Follow the path up the steps, and when you reach the landing, turn to your right and continue up three more steps. Once you reach the top, just wait there.---",
                 "instruction_tokens": [
                     2300,
                     141,
@@ -88211,7 +88211,7 @@
                 }
             ],
             "instruction": {
-                "instruction_text": "Here’s a more natural combination of your navigation instructions and the related question:\n\n---\n\nAfter exiting the bathroom, head into the hallway and walk straight ahead until you reach the end of the banister on your right. From there, turn right again and take two steps down the stairs. Pause for a moment on the second step. While you're waiting, take a look around—what do you see at the bottom of the stairs?",
+                "instruction_text": "Here’s a more natural combination of your navigation instructions and the related question:\n\n---\n\nAfter exiting the bathroom, head into the hallway and walk straight ahead until you reach the end of the banister on your right. From there, turn right again and take two steps down the stairs. Pause for a moment on the second step. While you're waiting, take a look around—what do you see at the bottom of the stairs?---",
                 "instruction_tokens": [
                     816,
                     2202,
@@ -152765,7 +152765,7 @@
                 }
             ],
             "instruction": {
-                "instruction_text": "Here’s a more natural combination of your navigation instructions and the question:\n\n---\n\nTo reach the dining room, turn left at the building's exit and walk down the entrance way. As you make your way, you'll see the kitchen area on your right, complete with a counter and chairs. Keep going straight until you enter the dining room. Once inside, please stop about one meter from the nearest end of the long dining table.\n\n**Question:** Where is the dining table?",
+                "instruction_text": "Here’s a more natural combination of your navigation instructions and the question:\n\n---\n\nTo reach the dining room, turn left at the building's exit and walk down the entrance way. As you make your way, you'll see the kitchen area on your right, complete with a counter and chairs. Keep going straight until you enter the dining room. Once inside, please stop about one meter from the nearest end of the long dining table.\n\n**Question:** Where is the dining table?---",
                 "instruction_tokens": [
                     2300,
                     1752,
