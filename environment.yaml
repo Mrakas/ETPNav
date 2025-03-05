@@ -1,4 +1,4 @@
-name: vlnce
+name: etpnav
 channels:
   - aihabitat
   - ostrokach-forge
@@ -141,7 +141,6 @@ dependencies:
       - cfgv==3.3.1
       - charset-normalizer==2.0.10
       - click==8.0.3
-      - clip==1.0
       - cloudpickle==2.0.0
       - conda-pack==0.6.0
       - dataclasses==0.8
@@ -163,7 +162,6 @@ dependencies:
       - gym==0.10.9
       - gym-notices==0.0.8
       - h5py==3.1.0
-      - habitat-sim==0.1.7
       - higher==0.2.1
       - huggingface-hub==0.4.0
       - hydra-core==1.3.2
@@ -257,3 +255,4 @@ dependencies:
       - yacs==0.1.8
       - zipp==3.6.0
 prefix: /home/andong/miniconda3/envs/vlnce
+#deletede habitat-sim==0.1.7
