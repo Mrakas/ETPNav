@@ -108,6 +108,8 @@ class VLNCEDatasetV1(Dataset):
     ) -> None:
 
         deserialized = json.loads(json_str)
+        #import pdb; pdb.set_trace()
+        #print("deserialized", deserialized[:10])
         self.instruction_vocab = VocabDict(
             word_list=deserialized["instruction_vocab"]["word_list"]
         )

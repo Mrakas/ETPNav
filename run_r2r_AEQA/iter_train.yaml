@@ -13,6 +13,7 @@ VIDEO_DIR: data/logs/video/
 
 INFERENCE:
   SPLIT: test
+  #SPLIT: val_unseen
   USE_CKPT_CONFIG: False
   SAMPLE: False
   CKPT_PATH: '' # REPLACE THIS
@@ -22,7 +23,7 @@ INFERENCE:
 
 EVAL:
   USE_CKPT_CONFIG: False
-  SPLIT: val_unseen
+  SPLIT: train
   EPISODE_COUNT: -1
   CKPT_PATH_DIR: ''
   fast_eval: False
@@ -31,7 +32,7 @@ IL:
   iters: 15000
   log_every: 200
   lr: 1e-5
-  batch_size: 1 # equal to NUM_ENVIRONMENTS
+  batch_size: 16 # equal to NUM_ENVIRONMENTS
   ml_weight: 1.0
   expert_policy: spl
 

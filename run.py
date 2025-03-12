@@ -74,7 +74,8 @@ def run_exp(exp_name: str, exp_config: str,
     config.LOG_FILE = exp_name + '_' + config.LOG_FILE
     if 'CMA' in config.MODEL.policy_name and 'r2r' in config.BASE_TASK_CONFIG_PATH:
         config.TASK_CONFIG.DATASET.DATA_PATH = 'data/datasets/R2R_VLNCE_v1-2_preprocessed/{split}/{split}.json.gz'
-    print("==========DATA=============", config.TASK_CONFIG.DATASET.DATA_PATH)
+        print("===============CHANGED================", config.TASK_CONFIG.DATASET.DATA_PATH)
+    print("==========DATA=============correct", config.TASK_CONFIG.DATASET.DATA_PATH)
     config.local_rank = local_rank
     config.freeze()
     os.system("mkdir -p data/logs/running_log")

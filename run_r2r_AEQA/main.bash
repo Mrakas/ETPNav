@@ -1,9 +1,11 @@
 export GLOG_minloglevel=2
 export MAGNUM_LOG=quiet
+exp_name=$'release_r2r_AEQA'
+config_path=$'run_r2r_AEQA/iter_train.yaml'
 
-flag1="--exp_name release_r2r
+flag1="--exp_name $exp_name
       --run-type train
-      --exp-config run_r2r_AEQA/iter_train.yaml
+      --exp-config $config_path
       SIMULATOR_GPU_IDS [0,1]
       TORCH_GPU_IDS [0,1]
       GPU_NUMBERS 2
@@ -21,28 +23,28 @@ flag1="--exp_name release_r2r
       MODEL.pretrained_path pretrained/ETP/mlm.sap_r2r/ckpts/model_step_82500.pt
       "
 
-flag2=" --exp_name release_r2r
+flag2=" --exp_name $exp_name
       --run-type eval
-      --exp-config run_r2r_AEQA/iter_train.yaml
+      --exp-config $config_path
       SIMULATOR_GPU_IDS [0,1]
       TORCH_GPU_IDS [0,1]
       GPU_NUMBERS 2
       NUM_ENVIRONMENTS 8
       TASK_CONFIG.SIMULATOR.HABITAT_SIM_V0.ALLOW_SLIDING True
-      EVAL.CKPT_PATH_DIR data/logs/checkpoints/release_r2r/ckpt.iter12000.pth
+      EVAL.CKPT_PATH_DIR /mnt/data5/ghx/ETPworkplace/ETPNav/data/logs/checkpoints/release_r2r_AEQA/ckpt.iter12000.pth
       IL.back_algo control
       "
 
-flag3="--exp_name release_r2r
+flag3="--exp_name $exp_name
       --run-type inference
-      --exp-config run_r2r_AEQA/iter_train.yaml
+      --exp-config $config_path
       SIMULATOR_GPU_IDS [0,1]
       TORCH_GPU_IDS [0,1]
       GPU_NUMBERS 2
       NUM_ENVIRONMENTS 8
       TASK_CONFIG.SIMULATOR.HABITAT_SIM_V0.ALLOW_SLIDING True
-      INFERENCE.CKPT_PATH data/logs/checkpoints/release_r2r/ckpt.iter12000.pth
-      INFERENCE.PREDICTIONS_FILE preds.json
+      INFERENCE.CKPT_PATH /mnt/data5/ghx/ETPworkplace/ETPNav/data/logs/checkpoints/release_r2r_AEQA/ckpt.iter12000.pth
+      INFERENCE.PREDICTIONS_FILE preds_AEQA_val_unseen.json
       IL.back_algo control
       "
 

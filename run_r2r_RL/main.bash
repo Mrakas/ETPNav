@@ -1,14 +1,14 @@
 export GLOG_minloglevel=2
 export MAGNUM_LOG=quiet
 
-flag1="--exp_name release_r2r_RL
+flag1="--exp_name release_r2r_RL_s2_epoch5000
       --run-type train
       --exp-config run_r2r_RL/iter_train.yaml
       SIMULATOR_GPU_IDS [0,1]
       TORCH_GPU_IDS [0,1]
       GPU_NUMBERS 2
       NUM_ENVIRONMENTS 8
-      IL.iters 15000
+      IL.iters 5000
       IL.lr 1e-5
       IL.log_every 200
       IL.ml_weight 1.0
@@ -21,7 +21,7 @@ flag1="--exp_name release_r2r_RL
       MODEL.pretrained_path pretrained/ETP/mlm.sap_r2r/ckpts/model_step_82500.pt
       "
 
-flag2=" --exp_name release_r2r_RL
+flag2=" --exp_name release_r2r_RL_s2_epoch5000
       --run-type eval
       --exp-config run_r2r_RL/iter_train.yaml
       SIMULATOR_GPU_IDS [0,1]
@@ -29,11 +29,11 @@ flag2=" --exp_name release_r2r_RL
       GPU_NUMBERS 2
       NUM_ENVIRONMENTS 8
       TASK_CONFIG.SIMULATOR.HABITAT_SIM_V0.ALLOW_SLIDING True
-      EVAL.CKPT_PATH_DIR data/logs/checkpoints/release_r2r/ckpt.iter12000.pth
+      EVAL.CKPT_PATH_DIR data/logs/checkpoints/release_r2r_RL_s2_epoch5000/ckpt.5000.pth
       IL.back_algo control
       "
 
-flag3="--exp_name release_r2r_RL
+flag3="--exp_name release_r2r_RL_s2_epoch5000
       --run-type inference
       --exp-config run_r2r_RL/iter_train.yaml
       SIMULATOR_GPU_IDS [0,1]
@@ -41,7 +41,7 @@ flag3="--exp_name release_r2r_RL
       GPU_NUMBERS 2
       NUM_ENVIRONMENTS 8
       TASK_CONFIG.SIMULATOR.HABITAT_SIM_V0.ALLOW_SLIDING True
-      INFERENCE.CKPT_PATH data/logs/checkpoints/release_r2r/ckpt.iter12000.pth
+      INFERENCE.CKPT_PATH data/logs/checkpoints/release_r2r_RL_s2_epoch5000/ckpt.5000.pth
       INFERENCE.PREDICTIONS_FILE preds.json
       IL.back_algo control
       "

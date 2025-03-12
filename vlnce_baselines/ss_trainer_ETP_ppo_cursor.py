@@ -95,7 +95,7 @@ class RLTrainer(BaseVLNCETrainer):
         #import pdb; pdb.set_trace()
 
         # PPO相关配置
-        if not hasattr(self.config, 'PPO'):
+        if not hasattr(self.config, 'PPO'): 
             self.config.PPO = CN()
             self.config.PPO.epochs = 4  # PPO更新的轮数
             self.config.PPO.clip_param = 0.2  # PPO裁剪参数
@@ -301,11 +301,12 @@ class RLTrainer(BaseVLNCETrainer):
                     if not hasattr(self, 'value_head'):
                         # 创建值函数头
                         self.value_head = nn.Sequential(
-                            nn.Linear(global_features.size(-1), 128),
+                            nn.Linear(global_features.size(-1), 512),
                             nn.ReLU(),
-                            nn.Linear(128, 1)
+                            nn.Dropout(0.6),
+                            nn.Linear(512,1)
                         ).to(global_features.device)
-                    
+
                     # 计算值函数
                     state_values = self.value_head(global_features)
                     outputs['state_values'] = state_values
@@ -590,6 +591,8 @@ class RLTrainer(BaseVLNCETrainer):
             values = rollout_data['values']
             
             # 确保所有数据长度一致
+            # print("=======rewards", len(rewards),"values", len(values), "dones", len(dones))
+            # print("=======actions", len(actions),"old_log_probs", len(old_log_probs), "states", len(states))
             traj_length = min(len(rewards), len(values), len(dones))
             rewards = rewards[:traj_length]
             values = values[:traj_length]
@@ -599,13 +602,13 @@ class RLTrainer(BaseVLNCETrainer):
             states = states[:traj_length]
             
             # 在开始前确定统一的batch_size
-            min_batch_size = float('inf')  # TODO 改为padding?
+            min_batch_size = float('inf')  # TODO 
             for step in range(traj_length):
                 min_batch_size = min(min_batch_size, rewards[step].size(0))
                 min_batch_size = min(min_batch_size, values[step].size(0))
                 min_batch_size = min(min_batch_size, actions[step].size(0))
                 min_batch_size = min(min_batch_size, old_log_probs[step].size(0))
-            
+                # print("every size", rewards[step].size(0), values[step].size(0), dones[step].size(0), actions[step].size(0), old_log_probs[step].size(0))
             # 预处理所有数据到相同的batch_size
             for step in range(traj_length):
                 rewards[step] = rewards[step][:min_batch_size].detach()
@@ -1286,7 +1289,7 @@ class RLTrainer(BaseVLNCETrainer):
                             curr_distance = np.linalg.norm(np.array(new_cur_pos[i]) - goal_positions[i])
                             progress_reward = prev_distance - curr_distance
                             rewards[i] += max(0, progress_reward * 0.5)  # 缩放进度奖励
-                print("reward_sum:",rewards.sum())
+                #print("reward_sum:",rewards.sum())
                 ppo_rewards.append(rewards)
                 ppo_dones.append(torch.tensor(dones, device=self.device))
                 
